@@ -12,9 +12,9 @@ func InitRouter(r *gin.Engine) {
 	r.POST("/home/login", v1.Login)
 
 	// v1 版本
-	GroupV1 := r.Group("/v1").Use(jwt.JWTAuthMiddleware())
+	GroupV1 := r.Group("/v1")
+	GroupV1.Use(jwt.JWTAuthMiddleware())
 	{
-		GroupV1.Any("/product/add", v1.AddProduct)
 		GroupV1.Any("/home/index", v1.Index)
 	}
 }
