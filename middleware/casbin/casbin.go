@@ -9,37 +9,36 @@ import (
 func CasbinMiddleware() func(c *gin.Context) {
 	//在return语句之前定义的内容将只在初始化时执行一次。
 	fmt.Println("casbin init")
-	e, _ := casbin.NewEnforcer("/Users/whale4u/Code/ginDemo/config/rbac_model.conf", "/Users/whale4u/Code/ginDemo/config/rbac_policy.csv")
-
-	// 注册自定义函数
-	e.AddFunction("my_func", KeyMatchFunc)
-
-	// Load the policy from DB.
-	e.LoadPolicy()
-
-	sub := "susan" // the user that wants to access a resource.
-	obj := "data1" // the resource that is going to be accessed.
-	act := "read"  // the operation that the user performs on the resource.
+	e, _ := casbin.NewEnforcer("/Users/whale4u/Code/ginDemo/config/acl_model.conf", "/Users/whale4u/Code/ginDemo/config/acl_policy.csv")
 
 	return func(c *gin.Context) {
 		fmt.Println("in casbin")
+		role, _ := c.Get("username")
 
-		// Pass on to the next-in-chain
-		ok, err := e.Enforce(sub, obj, act)
-
-		// fmt.Println(ok)
-
-		if err != nil {
-			// handle err
-			fmt.Printf("%s", err)
+		if role == "" {
+			role = "anonymous"
 		}
+		// if it's a member, check if the user still exists
+		//if role == "member" {
+		//	uid, err := session.GetInt(r, "userID")
+		//	if err != nil {
+		//		writeError(http.StatusInternalServerError, "ERROR", w, err)
+		//		return
+		//	}
+		//	exists := users.Exists(uid)
+		//	if !exists {
+		//		writeError(http.StatusForbidden, "FORBIDDEN", w, errors.New("user does not exist"))
+		//		return
+		//	}
+		//}
+		// casbin enforce
+		ok, _ := e.Enforce(role, c.URL.Path, c.Method)
 
-		if ok == true {
-			// permit alice to read data1
-			fmt.Println(sub, obj, act, " Pass")
+		if ok {
+			c.Next()
+			fmt.Println("casbin check pass")
 		} else {
-			// deny the request, show an error
-			fmt.Println(sub, obj, act, " Fail")
+			fmt.Println("casbin check fail")
 		}
 
 		c.Next()
