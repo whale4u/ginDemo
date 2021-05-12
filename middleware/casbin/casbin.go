@@ -10,7 +10,7 @@ import (
 func CasbinMiddleware() func(c *gin.Context) {
 	//在return语句之前定义的内容将只在初始化时执行一次。
 	fmt.Println("casbin init")
-	e, _ := casbin.NewEnforcer("/Users/whale4u/Code/ginDemo/config/acl_model.conf", "/Users/whale4u/Code/ginDemo/config/acl_policy.csv")
+	e, _ := casbin.NewEnforcer("config/acl_model.conf", "config/acl_policy.csv")
 
 	e.LoadPolicy()
 

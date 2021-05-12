@@ -31,3 +31,12 @@ curl --location --request POST 'http://127.0.0.1:8080/home/login' \
 curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
 --header 'Authorization:Bearer xxx'
 ```
+## docker部署
+1、生成docker images
+```shell script
+docker build -t gindemo1 .
+```
+2、运行容器
+```shell script
+docker run -p 8000:8000 gindemo1
+```
