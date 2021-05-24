@@ -2,8 +2,7 @@ package casbin
 
 import (
 	"fmt"
-	//"reflect"
-	"github.com/casbin/casbin/v2"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,6 +36,7 @@ func CasbinMiddleware() func(c *gin.Context) {
 		// casbin enforce
 		//fmt.Println("====", reflect.TypeOf(role), reflect.TypeOf(c.Request.URL), reflect.TypeOf(c.Request.Method))
 		ok, _ := e.Enforce(role, c.Request.URL.String(), c.Request.Method)
+		fmt.Println("====", role, c.Request.URL.String(), c.Request.Method)
 		//ok, _ := e.Enforce("admin111", "/v1/home/index", "GET")
 
 		//获取所有policy
