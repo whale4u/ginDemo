@@ -3,9 +3,7 @@ package router
 import (
 	"ginDemo/controller/v1"
 	"ginDemo/middleware/casbin"
-	//"ginDemo/middleware/dummy"
 	"ginDemo/middleware/jwt"
-	//"ginDemo/middleware/yummy"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +11,7 @@ func InitRouter(r *gin.Engine) {
 
 	//r.GET("/sn", SignDemo)
 	r.POST("/home/login", v1.Login)
+	r.POST("/passwd/addpasswd", v1.AddPasswd)
 
 	// v1 版本
 	GroupV1 := r.Group("/v1")

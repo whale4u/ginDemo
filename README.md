@@ -31,6 +31,13 @@ curl --location --request POST 'http://127.0.0.1:8080/home/login' \
 curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
 --header 'Authorization:Bearer xxx'
 ```
+
+### 新增密码接口
+```
+curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
+--header 'Content-Type: application/json' \
+--data-raw '{"type":"passwd", "name":"saas", "url":"http://www.baidu.com", "username":"admin", "password":"pass", "note":"this_is_note"}'
+```
 ## docker部署
 1、生成docker images
 ```shell script
