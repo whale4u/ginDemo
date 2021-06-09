@@ -33,17 +33,61 @@ curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
 ```
 
 ### 新增密码接口
+
 ```
 curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
 --header 'Content-Type: application/json' \
 --data-raw '{"type":"passwd", "name":"saas", "url":"http://www.baidu.com", "username":"admin", "password":"pass", "note":"this_is_note"}'
 ```
+
+### add user
+
+```
+curl --location --request POST 'http://127.0.0.1:8080/user/add' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"root", "password":"root123"}'
+```
+
+### del user
+
+```
+curl --location --request DELETE 'http://127.0.0.1:8080/user/delete/1'
+```
+
+### find user
+
+```
+curl --location --request POST 'http://127.0.0.1:8080/user/find?username="admin"'
+```
+
+### update user
+
+```
+curl --location --request POST 'http://127.0.0.1:8080/user/update' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"root", "password":"root234"}'
+```
+
+### get all user
+
+```
+```
+
 ## docker部署
+
 1、生成docker images
+
 ```shell script
 docker build -t gindemo1 .
 ```
+
 2、运行容器
+
 ```shell script
 docker run -p 8080:8080 gindemo1
 ```
+
+## 参考文章
+
+- https://github.com/kuangshp/gin-admin-api/
+- https://learnku.com/articles/23548/gingormrouter-quickly-build-crud-restful-api-interface

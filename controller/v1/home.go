@@ -19,9 +19,9 @@ func Login(c *gin.Context) {
 		return
 	}
 	// 校验用户名和密码是否正确
-	if user.UserName == "admin" && user.Password == "pass" {
+	if user.Username == "admin" && user.Password == "pass" {
 		// 生成Token
-		tokenString, _ := common.GenToken(user.UserName)
+		tokenString, _ := common.GenToken(user.Username)
 		c.JSON(http.StatusOK, gin.H{
 			"code": 2000,
 			"msg":  "success",
