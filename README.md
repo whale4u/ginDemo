@@ -71,6 +71,7 @@ curl --location --request POST 'http://127.0.0.1:8080/user/update' \
 ### get all user
 
 ```
+curl --location --request GET 'http://127.0.0.1:8080/user/getall'
 ```
 
 ## docker部署
