@@ -2,15 +2,17 @@ package router
 
 import (
 	"ginDemo/controller/v1"
-	"ginDemo/middleware/logger"
+	"ginDemo/middleware/casbin"
+	"ginDemo/middleware/jwt"
 	"github.com/gin-gonic/gin"
 )
 
 func InitRouter(r *gin.Engine) {
 
 	//r.GET("/sn", SignDemo)
-	//r.POST("/home/login", v1.Login)
+	r.POST("/home/login", v1.Login)
 	r.POST("/passwd/addpasswd", v1.AddPasswd)
+	// 用户管理接口
 	r.POST("/user/add", v1.AddUser)
 	r.DELETE("/user/delete/:id", v1.DelUser)
 	r.POST("/user/find", v1.FindUser)
@@ -19,10 +21,8 @@ func InitRouter(r *gin.Engine) {
 
 	// v1 版本
 	GroupV1 := r.Group("/v1")
-	//GroupV1.Use(jwt.JWTAuthMiddleware(), casbin.CasbinMiddleware(), logger.LoggerMiddleware())
-	GroupV1.Use(logger.LoggerMiddleware())
+	GroupV1.Use(jwt.JWTAuthMiddleware(), casbin.CasbinMiddleware())
 	{
 		GroupV1.Any("/home/index", v1.Index)
-		GroupV1.Any("/home/login", v1.Login)
 	}
 }

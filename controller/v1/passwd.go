@@ -19,20 +19,27 @@ func AddPasswd(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(passwd)
-	// 校验用户名和密码是否正确
-	if passwd.UserName != "" {
-		// 生成Token
-		fmt.Println(passwd)
-		c.JSON(http.StatusOK, gin.H{
-			"code": 2000,
-			"msg":  "success",
-		})
-		return
+	//此处需要可逆加密！
+	//plainPasswd := passwd.Password
+	//encrptPasswd, _ := utils.GeneratePassword(plainPasswd)
+	//passwd.Password = encrptPasswd
+
+	if passwd.Name != "" && passwd.Username != "" {
+		flag, itemId := passwd.InsertPasswd()
+		fmt.Println("item id: ", itemId)
+		fmt.Println(flag)
+		if !flag {
+			fmt.Println("add passwd fail.")
+			c.JSON(http.StatusOK, gin.H{
+				"code": 2002,
+				"msg":  "鉴权失败",
+			})
+			return
+		}
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"code": 2002,
-		"msg":  "鉴权失败",
+		"code": 200,
+		"msg":  "add passwd success.",
 	})
 	return
 }
