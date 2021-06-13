@@ -40,6 +40,7 @@ curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
 --data-raw '{"type":"passwd", "name":"saas", "url":"http://www.baidu.com", "username":"admin", "password":"pass", "note":"this_is_note"}'
 ```
 
+以下需要像执行建表语句: common/user.sql
 ### add user
 
 ```
@@ -71,6 +72,7 @@ curl --location --request POST 'http://127.0.0.1:8080/user/update' \
 ### get all user
 
 ```
+curl --location --request GET 'http://127.0.0.1:8080/user/getall'
 ```
 
 ## docker部署
