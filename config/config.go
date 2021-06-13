@@ -12,4 +12,7 @@ const (
 	MYSQL_USERNAME = "root"
 	MYSQL_PASSWORD = ""
 	MYSQL_CHARSET  = "utf8"
+	//log
+	LOG_FILE_PATH = "."
+	LOG_FILE_NAME = "log.json"
 )
