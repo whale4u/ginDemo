@@ -23,3 +23,17 @@ func (passwd Passwd) InsertPasswd() (Result bool, Id int64) {
 	}
 	return true, passwd.Id
 }
+
+// 注：存在bug，无论是否存在都提示删除成功！！！
+
+func (passwd *Passwd) DeletePassword(id int64) (Result Passwd) {
+	passwd.Id = id
+	//if err := orm.DB.Where("id = ?", id).Delete(&passwd).Error; err != nil {
+	//	return
+	//}
+	if err := orm.DB.Delete(&passwd).Error; err != nil {
+		return
+	}
+	Result = *passwd
+	return
+}

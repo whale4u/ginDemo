@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"ginDemo/entity"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -42,4 +43,22 @@ func AddPasswd(c *gin.Context) {
 		"msg":  "add passwd success.",
 	})
 	return
+}
+
+func DelPasswd(c *gin.Context) {
+	var passwd entity.Passwd
+	id, _ := strconv.ParseInt(c.Param("id"), 10, 64)
+	sqlId := passwd.DeletePassword(id).Id
+	fmt.Println("sqlId: ", sqlId)
+	//if !flag {
+	//	c.JSON(http.StatusOK, gin.H{
+	//		"code":    -1,
+	//		"message": "delete error",
+	//	})
+	//	return
+	//}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "delete success",
+	})
 }

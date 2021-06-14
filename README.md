@@ -32,6 +32,8 @@ curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
 --header 'Authorization:Bearer xxx'
 ```
 
+## 密码管理接口
+
 ### 新增密码接口
 
 ```
@@ -40,7 +42,14 @@ curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
 --data-raw '{"type":"passwd", "name":"saas", "url":"http://www.baidu.com", "username":"admin", "password":"pass", "note":"this_is_note"}'
 ```
 
+### 删除密码接口
+
+```
+
+```
+
 以下需要像执行建表语句: common/user.sql
+
 ### add user
 
 ```
