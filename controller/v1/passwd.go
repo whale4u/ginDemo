@@ -26,7 +26,7 @@ func AddPasswd(c *gin.Context) {
 	//passwd.Password = encrptPasswd
 
 	if passwd.Name != "" && passwd.Username != "" {
-		flag, itemId := passwd.Insert()
+		flag, itemId := passwd.Add()
 		fmt.Println("item id: ", itemId)
 		fmt.Println(flag)
 		if !flag {
@@ -60,5 +60,24 @@ func DelPasswd(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "delete success",
+	})
+}
+
+func InquirePasswd(c *gin.Context) {
+	var passwd entity.Passwd
+	//username := c.Request.FormValue("username")
+	name := c.Request.FormValue("name")
+	result := passwd.Inquire(name)
+	//fmt.Println(result)
+	if result.Username == "" {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": result,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": result,
 	})
 }

@@ -71,7 +71,7 @@ func DelUser(c *gin.Context) {
 func FindUser(c *gin.Context) {
 	var user entity.User
 	username := c.Request.FormValue("username")
-	fmt.Println("username: ", username)
+	//fmt.Println("username: ", username)
 	result := user.Find(username)
 	if result.Username == "" {
 		c.JSON(http.StatusOK, gin.H{

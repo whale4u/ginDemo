@@ -14,6 +14,7 @@ func InitRouter(r *gin.Engine) {
 	// 密码管理接口
 	r.POST("/passwd/addpasswd", v1.AddPasswd)
 	r.DELETE("/passwd/delete/:id", v1.DelPasswd)
+	r.POST("/passwd/inquire", v1.InquirePasswd)
 	// 用户管理接口
 	r.POST("/user/add", v1.AddUser)
 	r.DELETE("/user/delete/:id", v1.DelUser)

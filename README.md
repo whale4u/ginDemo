@@ -35,7 +35,6 @@ curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
 ## 密码管理接口
 
 ### 新增密码接口
-
 ```
 curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
 --header 'Content-Type: application/json' \
@@ -45,7 +44,13 @@ curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
 ### 删除密码接口
 
 ```
+curl --location --request DELETE 'http://127.0.0.1:8080/passwd/delete/3'
+```
 
+### 查询密码接口
+
+```
+curl --location --request POST 'http://127.0.0.1:8080/passwd/inquire?name=saas'
 ```
 
 以下需要像执行建表语句: common/user.sql
@@ -67,7 +72,7 @@ curl --location --request DELETE 'http://127.0.0.1:8080/user/delete/1'
 ### find user
 
 ```
-curl --location --request POST 'http://127.0.0.1:8080/user/find?username="admin"'
+curl --location --request POST 'http://127.0.0.1:8080/user/find?username=root'
 ```
 
 ### update user

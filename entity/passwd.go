@@ -15,7 +15,7 @@ type Passwd struct {
 	Note     string `json:"note"`
 }
 
-func (passwd Passwd) Insert() (Result bool, Id int64) {
+func (passwd Passwd) Add() (Result bool, Id int64) {
 	result := orm.DB.Create(&passwd)
 	if result.Error != nil {
 		fmt.Println("Error: ", result.Error)
@@ -32,6 +32,15 @@ func (passwd *Passwd) Delete(id int64) (Result Passwd) {
 	//	return
 	//}
 	if err := orm.DB.Delete(&passwd).Error; err != nil {
+		return
+	}
+	Result = *passwd
+	return
+}
+
+func (passwd *Passwd) Inquire(name string) (Result Passwd) {
+	passwd.Name = name
+	if err := orm.DB.First(&passwd, "name = ?", name).Error; err != nil {
 		return
 	}
 	Result = *passwd
