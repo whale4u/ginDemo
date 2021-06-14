@@ -29,7 +29,7 @@ func AddUser(c *gin.Context) {
 		return
 	}
 
-	result := user.Find(user.Username)
+	result := user.Inquire(user.Username)
 	if result.Username != "" {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -37,7 +37,7 @@ func AddUser(c *gin.Context) {
 		})
 		return
 	}
-	_, err := user.Insert()
+	_, err := user.Add()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -72,7 +72,7 @@ func FindUser(c *gin.Context) {
 	var user entity.User
 	username := c.Request.FormValue("username")
 	//fmt.Println("username: ", username)
-	result := user.Find(username)
+	result := user.Inquire(username)
 	if result.Username == "" {
 		c.JSON(http.StatusOK, gin.H{
 			"code":    -1,
@@ -99,10 +99,10 @@ func UpdateUser(c *gin.Context) {
 	EncryptPassword, _ := utils.GeneratePassword(PlainPassword)
 
 	fmt.Println("username: ", username)
-	result := user.Find(username)
+	result := user.Inquire(username)
 	if result.Username != "" {
 		fmt.Println("found user: ", result.Username)
-		if user.Update(username, EncryptPassword) {
+		if user.Change(username, EncryptPassword) {
 			c.JSON(http.StatusOK, gin.H{
 				"code":    1,
 				"message": "update ok",
