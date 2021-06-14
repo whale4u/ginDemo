@@ -26,7 +26,7 @@ func AddPasswd(c *gin.Context) {
 	//passwd.Password = encrptPasswd
 
 	if passwd.Name != "" && passwd.Username != "" {
-		flag, itemId := passwd.InsertPasswd()
+		flag, itemId := passwd.Insert()
 		fmt.Println("item id: ", itemId)
 		fmt.Println(flag)
 		if !flag {
@@ -48,7 +48,7 @@ func AddPasswd(c *gin.Context) {
 func DelPasswd(c *gin.Context) {
 	var passwd entity.Passwd
 	id, _ := strconv.ParseInt(c.Param("id"), 10, 64)
-	sqlId := passwd.DeletePassword(id).Id
+	sqlId := passwd.Delete(id).Id
 	fmt.Println("sqlId: ", sqlId)
 	//if !flag {
 	//	c.JSON(http.StatusOK, gin.H{

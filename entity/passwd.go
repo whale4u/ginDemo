@@ -15,7 +15,7 @@ type Passwd struct {
 	Note     string `json:"note"`
 }
 
-func (passwd Passwd) InsertPasswd() (Result bool, Id int64) {
+func (passwd Passwd) Insert() (Result bool, Id int64) {
 	result := orm.DB.Create(&passwd)
 	if result.Error != nil {
 		fmt.Println("Error: ", result.Error)
@@ -26,7 +26,7 @@ func (passwd Passwd) InsertPasswd() (Result bool, Id int64) {
 
 // 注：存在bug，无论是否存在都提示删除成功！！！
 
-func (passwd *Passwd) DeletePassword(id int64) (Result Passwd) {
+func (passwd *Passwd) Delete(id int64) (Result Passwd) {
 	passwd.Id = id
 	//if err := orm.DB.Where("id = ?", id).Delete(&passwd).Error; err != nil {
 	//	return
