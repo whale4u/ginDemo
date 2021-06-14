@@ -46,3 +46,15 @@ func (passwd *Passwd) Inquire(name string) (Result Passwd) {
 	Result = *passwd
 	return
 }
+
+// 注：根据主键name更新
+
+func (passwd *Passwd) Change(psw Passwd) (Result bool) {
+	if err := orm.DB.Model(&passwd).Where("name = ?", psw.Name).
+		Updates(Passwd{Type: psw.Type, Username: psw.Username, Password: psw.Password, URL: psw.URL, Note: psw.Note}); err != nil {
+		Result = true
+	} else {
+		Result = false
+	}
+	return Result
+}

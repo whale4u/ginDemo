@@ -81,3 +81,24 @@ func InquirePasswd(c *gin.Context) {
 		"message": result,
 	})
 }
+
+func ChangePasswd(c *gin.Context) {
+	var passwd, psw entity.Passwd
+	if err := c.ShouldBindJSON(&psw); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	fmt.Println(psw)
+	flag := passwd.Change(psw)
+	if !flag {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "update user error",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "update ok",
+	})
+}
