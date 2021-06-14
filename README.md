@@ -53,6 +53,14 @@ curl --location --request DELETE 'http://127.0.0.1:8080/passwd/delete/3'
 curl --location --request POST 'http://127.0.0.1:8080/passwd/inquire?name=saas'
 ```
 
+### 更新密码接口
+
+```
+curl --location --request POST 'http://127.0.0.1:8080/passwd/change' \
+--header 'Content-Type: application/json' \
+--data-raw '{"type":"passwd2", "name":"saas", "url":"http://www.baidu.com1", "username":"admin1", "password":"pass1", "note":"this_is_note1"}'
+```
+
 以下需要像执行建表语句: common/user.sql
 
 ### add user
