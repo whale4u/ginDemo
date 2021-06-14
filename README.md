@@ -93,3 +93,4 @@ docker run -p 8080:8080 gindemo1
 
 - https://github.com/kuangshp/gin-admin-api/
 - https://learnku.com/articles/23548/gingormrouter-quickly-build-crud-restful-api-interface
+- [gorm模糊查询](https://blog.csdn.net/qq_35167735/article/details/107862234)
