@@ -61,7 +61,15 @@ curl --location --request POST 'http://127.0.0.1:8080/passwd/change' \
 --data-raw '{"type":"passwd2", "name":"saas", "url":"http://www.baidu.com1", "username":"admin1", "password":"pass1", "note":"this_is_note1"}'
 ```
 
+### 获取所有密码接口
+
+```
+curl --location --request GET 'http://127.0.0.1:8080/passwd/getall'
+```
+
 以下需要像执行建表语句: common/user.sql
+
+## 用户管理接口
 
 ### add user
 

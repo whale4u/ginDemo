@@ -10,9 +10,9 @@ type Passwd struct {
 	Type     string `json:"type"`
 	Name     string `json:"name"`
 	Username string `json:"username"`
-	Password string `json:"password"`
-	URL      string `json:"url"`
-	Note     string `json:"note"`
+	Password string `json:"-"`
+	URL      string `json:"-"`
+	Note     string `json:"-"`
 }
 
 func (passwd Passwd) Add() (Result bool, Id int64) {
@@ -57,4 +57,12 @@ func (passwd *Passwd) Change(psw Passwd) (Result bool) {
 		Result = false
 	}
 	return Result
+}
+
+func (passwd *Passwd) Passwds() (AllPasswds []Passwd) {
+	var passwds []Passwd
+	if err := orm.DB.Find(&passwds).Error; err != nil {
+		return
+	}
+	return passwds
 }

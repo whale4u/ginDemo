@@ -102,3 +102,13 @@ func ChangePasswd(c *gin.Context) {
 		"message": "update ok",
 	})
 }
+
+func GetPasswds(c *gin.Context) {
+	var passwd entity.Passwd
+	passwds := passwd.Passwds()
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": passwds,
+	})
+	return
+}

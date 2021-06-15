@@ -31,7 +31,7 @@ func Login(c *gin.Context) {
 	Password := params["password"]
 
 	// 判断当前用户是否存在？如存在获取密码
-	dbUser := user.Find(Username)
+	dbUser := user.Inquire(Username)
 	//fmt.Println("dbUser pass: ", dbUser.Password)
 	//fmt.Println("user pass: ", Password)
 	if dbUser.Username != "" {
