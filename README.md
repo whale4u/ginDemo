@@ -20,15 +20,16 @@ ginDemo
 ```
 
 ### 登录接口
+注：需要先调用新增用户接口新建用户！
 ```
-curl --location --request POST 'http://127.0.0.1:8080/home/login' \
+curl --location --request POST 'http://127.0.0.1:8090/home/login' \
 --header 'Content-Type: application/json' \
---data-raw '{"username":"admin", "password":"pass"}'
+--data-raw '{"username":"root", "password":"root123"}'
 ```
 
 ### 主页接口
 ```
-curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
+curl --location --request GET 'http://127.0.0.1:8090/v1/home/index' \
 --header 'Authorization:Bearer xxx'
 ```
 
@@ -36,7 +37,7 @@ curl --location --request GET 'http://127.0.0.1:8080/v1/home/index' \
 
 ### 新增密码接口
 ```
-curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
+curl --location --request POST 'http://127.0.0.1:8090/passwd/addpasswd' \
 --header 'Content-Type: application/json' \
 --data-raw '{"type":"passwd", "name":"saas", "url":"http://www.baidu.com", "username":"admin", "password":"pass", "note":"this_is_note"}'
 ```
@@ -44,19 +45,19 @@ curl --location --request POST 'http://127.0.0.1:8080/passwd/addpasswd' \
 ### 删除密码接口
 
 ```
-curl --location --request DELETE 'http://127.0.0.1:8080/passwd/delete/3'
+curl --location --request DELETE 'http://127.0.0.1:8090/passwd/delete/3'
 ```
 
 ### 查询密码接口
 
 ```
-curl --location --request POST 'http://127.0.0.1:8080/passwd/inquire?name=saas'
+curl --location --request POST 'http://127.0.0.1:8090/passwd/inquire?name=saas'
 ```
 
 ### 更新密码接口
 
 ```
-curl --location --request POST 'http://127.0.0.1:8080/passwd/change' \
+curl --location --request POST 'http://127.0.0.1:8090/passwd/change' \
 --header 'Content-Type: application/json' \
 --data-raw '{"type":"passwd2", "name":"saas", "url":"http://www.baidu.com1", "username":"admin1", "password":"pass1", "note":"this_is_note1"}'
 ```
@@ -64,7 +65,7 @@ curl --location --request POST 'http://127.0.0.1:8080/passwd/change' \
 ### 获取所有密码接口
 
 ```
-curl --location --request GET 'http://127.0.0.1:8080/passwd/getall'
+curl --location --request GET 'http://127.0.0.1:8090/passwd/getall'
 ```
 
 以下需要像执行建表语句: common/user.sql
@@ -74,7 +75,7 @@ curl --location --request GET 'http://127.0.0.1:8080/passwd/getall'
 ### add user
 
 ```
-curl --location --request POST 'http://127.0.0.1:8080/user/add' \
+curl --location --request POST 'http://127.0.0.1:8090/user/add' \
 --header 'Content-Type: application/json' \
 --data-raw '{"username":"root", "password":"root123"}'
 ```
@@ -82,19 +83,19 @@ curl --location --request POST 'http://127.0.0.1:8080/user/add' \
 ### del user
 
 ```
-curl --location --request DELETE 'http://127.0.0.1:8080/user/delete/1'
+curl --location --request DELETE 'http://127.0.0.1:8090/user/delete/1'
 ```
 
 ### find user
 
 ```
-curl --location --request POST 'http://127.0.0.1:8080/user/find?username=root'
+curl --location --request POST 'http://127.0.0.1:8090/user/find?username=root'
 ```
 
 ### update user
 
 ```
-curl --location --request POST 'http://127.0.0.1:8080/user/update' \
+curl --location --request POST 'http://127.0.0.1:8090/user/update' \
 --header 'Content-Type: application/json' \
 --data-raw '{"username":"root", "password":"root234"}'
 ```
@@ -102,7 +103,7 @@ curl --location --request POST 'http://127.0.0.1:8080/user/update' \
 ### get all user
 
 ```
-curl --location --request GET 'http://127.0.0.1:8080/user/getall'
+curl --location --request GET 'http://127.0.0.1:8090/user/getall'
 ```
 
 ## docker部署
@@ -116,7 +117,7 @@ docker build -t gindemo1 .
 2、运行容器
 
 ```shell script
-docker run -p 8080:8080 gindemo1
+docker run -p 8090:8090 gindemo1
 ```
 
 ## 参考文章
